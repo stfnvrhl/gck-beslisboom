@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decision Tree – Proof of Concept</title>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f6f7;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .buttons {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #0066ff;
+      color: white;
+    }
+
+    button.secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- STEP 1 -->
+    <div id="step-1" class="step active">
+      <h1>Do you have a visible leak?</h1>
+      <div class="buttons">
+        <button onclick="goTo('step-2a')">Yes</button>
+        <button onclick="goTo('step-2b')">No</button>
+      </div>
+    </div>
+
+    <!-- STEP 2A -->
+    <div id="step-2a" class="step">
+      <h1>Is the leak coming from the kitchen?</h1>
+      <div class="buttons">
+        <button onclick="goTo('result-a')">Yes</button>
+        <button onclick="goTo('result-b')">No</button>
+        <button class="secondary" onclick="goBack()">Back</button>
+      </div>
+    </div>
+
+    <!-- STEP 2B -->
+    <div id="step-2b" class="step">
+      <h1>No visible leak detected.</h1>
+      <p>Monitor the situation and check again later.</p>
+      <div class="buttons">
+        <button onclick="goTo('result-c')">Continue</button>
+        <button class="secondary" onclick="goBack()">Back</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="result-a" class="step">
+      <h1>Result: Stop using the kitchen drain</h1>
+      <p>Contact maintenance immediately.</p>
+      <div class="buttons">
+        <button class="secondary" onclick="restart()">Start over</button>
+      </div>
+    </div>
+
+    <div id="result-b" class="step">
+      <h1>Result: Check upstairs plumbing</h1>
+      <p>The source may be higher up.</p>
+      <div class="buttons">
+        <button class="secondary" onclick="restart()">Start over</button>
+      </div>
+    </div>
+
+    <div id="result-c" class="step">
+      <h1>Result: No action required</h1>
+      <p>Keep monitoring for changes.</p>
+      <div class="buttons">
+        <button class="secondary" onclick="restart()">Start over</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Decision tree – web proof of concept
+    </div>
+
+  </div>
+
+  <script>
+    let historyStack = ['step-1'];
+
+    function goTo(stepId) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(stepId).classList.add('active');
+      historyStack.push(stepId);
+    }
+
+    function goBack() {
+      if (historyStack.length > 1) {
+        historyStack.pop();
+        const previous = historyStack[historyStack.length - 1];
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById(previous).classList.add('active');
+      }
+    }
+
+    function restart() {
+      historyStack = ['step-1'];
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-1').classList.add('active');
+    }
+  </script>
+</body>
+</html>
