@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Decision Tree – Proof of Concept</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beslisboom Kleiwegkwartier</title>
 
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f5f6f7;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f6f8;
       margin: 0;
       padding: 1rem;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 720px;
       margin: auto;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      background: #ffffff;
+      padding: 1.75rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
 
     h1 {
@@ -27,28 +27,20 @@
       margin-bottom: 1rem;
     }
 
-    .step {
-      display: none;
-    }
-
-    .step.active {
-      display: block;
-    }
-
     .buttons {
-      margin-top: 1.5rem;
       display: grid;
       gap: 0.75rem;
+      margin-top: 1.5rem;
     }
 
     button {
+      padding: 0.85rem;
       font-size: 1rem;
-      padding: 0.75rem;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
-      background: #0066ff;
-      color: white;
+      background: #0066cc;
+      color: #fff;
     }
 
     button.secondary {
@@ -66,91 +58,56 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="app"></div>
 
-    <!-- STEP 1 -->
-    <div id="step-1" class="step active">
-      <h1>Do you have a visible leak?</h1>
-      <div class="buttons">
-        <button onclick="goTo('step-2a')">Yes</button>
-        <button onclick="goTo('step-2b')">No</button>
-      </div>
-    </div>
-
-    <!-- STEP 2A -->
-    <div id="step-2a" class="step">
-      <h1>Is the leak coming from the kitchen?</h1>
-      <div class="buttons">
-        <button onclick="goTo('result-a')">Yes</button>
-        <button onclick="goTo('result-b')">No</button>
-        <button class="secondary" onclick="goBack()">Back</button>
-      </div>
-    </div>
-
-    <!-- STEP 2B -->
-    <div id="step-2b" class="step">
-      <h1>No visible leak detected.</h1>
-      <p>Monitor the situation and check again later.</p>
-      <div class="buttons">
-        <button onclick="goTo('result-c')">Continue</button>
-        <button class="secondary" onclick="goBack()">Back</button>
-      </div>
-    </div>
-
-    <!-- RESULTS -->
-    <div id="result-a" class="step">
-      <h1>Result: Stop using the kitchen drain</h1>
-      <p>Contact maintenance immediately.</p>
-      <div class="buttons">
-        <button class="secondary" onclick="restart()">Start over</button>
-      </div>
-    </div>
-
-    <div id="result-b" class="step">
-      <h1>Result: Check upstairs plumbing</h1>
-      <p>The source may be higher up.</p>
-      <div class="buttons">
-        <button class="secondary" onclick="restart()">Start over</button>
-      </div>
-    </div>
-
-    <div id="result-c" class="step">
-      <h1>Result: No action required</h1>
-      <p>Keep monitoring for changes.</p>
-      <div class="buttons">
-        <button class="secondary" onclick="restart()">Start over</button>
-      </div>
-    </div>
-
-    <div class="footer">
-      Decision tree – web proof of concept
-    </div>
-
-  </div>
-
+  <script src="tree.js"></script>
   <script>
-    let historyStack = ['step-1'];
+    let history = [];
+    let current = "s1";
 
-    function goTo(stepId) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById(stepId).classList.add('active');
-      historyStack.push(stepId);
+    function render(nodeId) {
+      const node = tree[nodeId];
+      const app = document.getElementById("app");
+
+      history.push(nodeId);
+      current = nodeId;
+
+      let html = `<h1>${node.text}</h1><div class="buttons">`;
+
+      if (node.options) {
+        node.options.forEach(opt => {
+          html += `<button onclick="go('${opt.next}')">${opt.label}</button>`;
+        });
+      }
+
+      if (node.result) {
+        html += `<button class="secondary" onclick="restart()">Opnieuw starten</button>`;
+      }
+
+      if (history.length > 1) {
+        html += `<button class="secondary" onclick="back()">Terug</button>`;
+      }
+
+      html += `</div><div class="footer">Beslisboom Kleiwegkwartier</div>`;
+      app.innerHTML = html;
     }
 
-    function goBack() {
-      if (historyStack.length > 1) {
-        historyStack.pop();
-        const previous = historyStack[historyStack.length - 1];
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById(previous).classList.add('active');
-      }
+    function go(next) {
+      render(next);
+    }
+
+    function back() {
+      history.pop();
+      history.pop();
+      render(history[history.length - 1]);
     }
 
     function restart() {
-      historyStack = ['step-1'];
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById('step-1').classList.add('active');
+      history = [];
+      render("s1");
     }
+
+    render("s1");
   </script>
 </body>
 </html>
