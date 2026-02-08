@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beslisboom Kleiwegkwartier</title>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: auto;
+      background: #ffffff;
+      padding: 1.75rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .buttons {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      padding: 0.85rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: #0066cc;
+      color: #fff;
+    }
+
+    button.secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="app"></div>
+
+  <script src="tree.js"></script>
+  <script>
+    let history = [];
+    let current = "s1";
+
+    function render(nodeId) {
+      const node = tree[nodeId];
+      const app = document.getElementById("app");
+
+      history.push(nodeId);
+      current = nodeId;
+
+      let html = `<h1>${node.text}</h1><div class="buttons">`;
+
+      if (node.options) {
+        node.options.forEach(opt => {
+          html += `<button onclick="go('${opt.next}')">${opt.label}</button>`;
+        });
+      }
+
+      if (node.result) {
+        html += `<button class="secondary" onclick="restart()">Opnieuw starten</button>`;
+      }
+
+      if (history.length > 1) {
+        html += `<button class="secondary" onclick="back()">Terug</button>`;
+      }
+
+      html += `</div><div class="footer">Beslisboom Kleiwegkwartier</div>`;
+      app.innerHTML = html;
+    }
+
+    function go(next) {
+      render(next);
+    }
+
+    function back() {
+      history.pop();
+      history.pop();
+      render(history[history.length - 1]);
+    }
+
+    function restart() {
+      history = [];
+      render("s1");
+    }
+
+    render("s1");
+  </script>
+</body>
+</html>
