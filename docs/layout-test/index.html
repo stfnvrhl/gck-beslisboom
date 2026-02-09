@@ -9,6 +9,13 @@
    html, body {
   height: 100%;
 }
+:root {
+  --primary-color: #1f6b3a;      /* dark green */
+  --primary-hover: #17532e;
+  --secondary-color: #e6e6e6;
+  --text-color: #1b1b1b;
+}
+
 
 body {
   font-family: system-ui, -apple-system, sans-serif;
@@ -40,20 +47,29 @@ body {
       margin-top: 1.5rem;
     }
 
-    button {
-      padding: 0.85rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      background: #0066cc;
-      color: #fff;
-    }
+   button {
+  padding: 0.85rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
 
-    button.secondary {
-      background: #e0e0e0;
-      color: #333;
-    }
+button:hover {
+  background: var(--primary-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.secondary {
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
 
     .footer {
       margin-top: 2rem;
