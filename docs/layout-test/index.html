@@ -95,7 +95,34 @@ button.secondary {
       history.push(nodeId);
       current = nodeId;
 
-      let html = `<h1>${node.text}</h1><div class="buttons">`;
+      let html = "";
+
+if (node.title) {
+  html += `<h1 class="title">${node.title}</h1>`;
+}
+
+if (node.text) {
+  html += `<p class="text">${node.text}</p>`;
+}
+
+if (node.image) {
+  html += `
+    <div class="image-wrapper">
+      <img src="${node.image}" alt="">
+    </div>
+  `;
+}
+
+if (node.bullets) {
+  html += "<ul class='bullets'>";
+  node.bullets.forEach(b => {
+    html += `<li>${b}</li>`;
+  });
+  html += "</ul>";
+}
+
+html += `<div class="buttons">`;
+
 
       if (node.options) {
         node.options.forEach(opt => {
