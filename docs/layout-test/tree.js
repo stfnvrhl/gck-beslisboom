@@ -9,10 +9,11 @@ const tree = {
 
   s2: {
     title: "Uitleg Stappenplan",
-    bullets:[ "In dit stappenplan krijgt u meerdere vragen om u op weg te helpen om het zelfbeheer van het openbare groen van de gemeente (al het groen wat niet op privé terrein staat) aan te vragen 
-","In dit stappenplan wordt u alleen geïnformeerd over het proces en de aanvraag van het zelfbeheer. Het is daarom belangrijk om eerst het hele stappenplan te doorlopen voordat u en/of uw buurtbewoners een plan willen indienen bij de gemeente. 
-", "Als u vragen heeft over het aanleggen en beheren van uw eigen tuin, dan kunt op hierop klikken;
-"],
+    bullets:[ 
+      "In dit stappenplan krijgt u meerdere vragen om u op weg te helpen om het zelfbeheer van het openbare groen van de gemeente (al het groen wat niet op privé terrein staat) aan te vragen",
+      "In dit stappenplan wordt u alleen geïnformeerd over het proces en de aanvraag van het zelfbeheer. Het is daarom belangrijk om eerst het hele stappenplan te doorlopen voordat u en/of uw buurtbewoners een plan willen indienen bij de gemeente.",
+      "Als u vragen heeft over het aanleggen en beheren van uw eigen tuin, dan kunt op hierop klikken;"
+    ],
     options: [
       { label: "Volgende", next: "s3" },
       { label: "Eigen tuin vergroenen", next: "s96" }
