@@ -1,0 +1,23 @@
+todo
+
+- bepaal paden beslisboom
+- Page layout 
+-- enkele afbeelding
+-- meerdere afbeeldingen + caption
+-- Phase indicator
+-- Bold tekst
+-- externe links
+
+- future proof wow
+-- JSON file
+-- Google Sheets of Excel --> JSON
+
+- Maak x aantal paginas (1e pad vd beslisboom)
+- Review
+- Finish
+
+
+--------------------------------
+- Sheets → JSON → app.js → HTML
+--------------------------------
+

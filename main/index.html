@@ -6,39 +6,57 @@
   <title>Beslisboom Kleiwegkwartier</title>
 
   <style>
-   html, body {
-  height: 100%;
-}
-:root {
-  --primary-color: #1f6b3a;      /* dark green */
-  --primary-hover: #17532e;
-  --secondary-color: #e6e6e6;
-  --text-color: #1b1b1b;
-}
+    :root {
+      --primary-color: #1f6b3a;
+      --primary-hover: #17532e;
+      --secondary-color: #e6e6e6;
+      --text-color: #1b1b1b;
+    }
 
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
 
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-image: url("images/background_1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 1rem;
-}
+    body {
+      background-image:url("images/background_1.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;     
+      padding: 1rem;
+    }
 
-.container {
-  max-width: 720px;
-  margin: auto;
-  background: rgba(255,255,255,0.9);
-  padding: 1.75rem;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
+    .container {
+      max-width: 720px;
+      margin: auto;
+      background: rgba(255,255,255,0.32);
+      backdrop-filter: blur(6px);
+      padding: 1.75rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
 
     h1 {
       font-size: 1.4rem;
       margin-bottom: 1rem;
+    }
+
+    .phase {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+    }
+
+    .text {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .bullets {
+      margin-bottom: 1rem;
+      padding-left: 1.2rem;
     }
 
     .buttons {
@@ -47,29 +65,40 @@ body {
       margin-top: 1.5rem;
     }
 
-   button {
-  padding: 0.85rem;
-  font-size: 1rem;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: var(--primary-color);
-  color: #fff;
-  transition: background 0.15s ease, transform 0.05s ease;
-}
+    button {
+      padding: 0.85rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: var(--primary-color);
+      color: #fff;
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
 
-button:hover {
-  background: var(--primary-hover);
-}
+    button:hover {
+      background: var(--primary-hover);
+    }
 
-button:active {
-  transform: scale(0.98);
-}
+    button:active {
+      transform: scale(0.98);
+    }
 
-button.secondary {
-  background: var(--secondary-color);
-  color: var(--text-color);
-}
+    button.secondary {
+      background: var(--secondary-color);
+      color: var(--text-color);
+    }
+
+    .image-wrapper {
+      margin: 1rem 0;
+      text-align: center;
+      height: auto;
+    }
+
+    .image-wrapper img {
+      max-width: 80%;
+      border-radius: 10px;
+    }
 
     .footer {
       margin-top: 2rem;
@@ -77,113 +106,17 @@ button.secondary {
       color: #666;
       text-align: center;
     }
-    .text {
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-.image-wrapper {
-  margin: 1rem 0;
-  text-align: center;
-}
-
-.image-wrapper img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.phase {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
 
   </style>
 </head>
 
 <body>
-  <div class="container" id="app"></div>
+  <div class="container">
+    <div id="app"></div>
+    <div class="footer">Beslisboom Kleiwegkwartier</div>
+  </div>
 
-  <script src="tree.js"></script>
-  <script>
-    let history = [];
-    let current = "s1";
-
-    function render(nodeId) {
-      const node = tree[nodeId];
-      const app = document.getElementById("app");
-
-      history.push(nodeId);
-      current = nodeId;
-
-      let html = "";
-
-if (node.title) {
-  html += `<h1 class="title">${node.title}</h1>`;
-}
-
-if (node.phase) {
-  html += `<div class="phase">Fase: ${node.phase}</div>`;
-}
-
-if (node.text) {
-  html += `<p class="text">${node.text}</p>`;
-}
-
-if (node.image) {
-  html += `
-    <div class="image-wrapper">
-      <img src="${node.image}" alt="">
-    </div>
-  `;
-}
-
-if (node.bullets) {
-  html += "<ul class='bullets'>";
-  node.bullets.forEach(b => {
-    html += `<li>${b}</li>`;
-  });
-  html += "</ul>";
-}
-
-html += `<div class="buttons">`;
-
-
-      if (node.options) {
-        node.options.forEach(opt => {
-          html += `<button onclick="go('${opt.next}')">${opt.label}</button>`;
-        });
-      }
-
-      if (node.result) {
-        html += `<button class="secondary" onclick="restart()">Opnieuw starten</button>`;
-      }
-
-      if (history.length > 1) {
-        html += `<button class="secondary" onclick="back()">Terug</button>`;
-      }
-
-      html += `</div><div class="footer">Beslisboom Kleiwegkwartier</div>`;
-      app.innerHTML = html;
-    }
-
-    function go(next) {
-      render(next);
-    }
-
-    function back() {
-      history.pop();
-      history.pop();
-      render(history[history.length - 1]);
-    }
-
-    function restart() {
-      history = [];
-      render("s1");
-    }
-
-    render("s1");
-  </script>
+  <!-- Alleen je applicatielogica -->
+  <script src="app.js"></script>
 </body>
 </html>
