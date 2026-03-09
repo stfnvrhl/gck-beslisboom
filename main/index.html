@@ -3,111 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <title>Beslisboom Kleiwegkwartier</title>
 
   <style>
-    :root {
-      --primary-color: #1f6b3a;
-      --primary-hover: #17532e;
-      --secondary-color: #e6e6e6;
-      --text-color: #1b1b1b;
-    }
+:root {
+  --primary-color: #1f6b3a;
+  --primary-hover: #17532e;
+  --secondary-color: #e6e6e6;
+  --text-color: #1b1b1b;
+}
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  line-height: 1.6;
+}
 
-    body {
-      background-image:url("images/background_1.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;     
-      padding: 1rem;
-    }
+body {
+  background-image:url("images/background_1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;     
+  padding: 1rem;
+}
 
-    .container {
-      max-width: 720px;
-      margin: auto;
-      background: rgba(255,255,255,0.32);
-      backdrop-filter: blur(6px);
-      padding: 1.75rem;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
+.container {
+  max-width: 720px;
+  margin: auto;
+  background: rgba(255,255,255,0.32);
+  backdrop-filter: blur(6px);
+  padding: 1.75rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
 
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
+/* TITEL */
 
-    .phase {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 0.75rem;
-    }
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
 
-    .text {
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
+/* FASE INDICATOR */
 
-    .bullets {
-      margin-bottom: 1rem;
-      padding-left: 1.2rem;
-    }
+.phase {
+  font-size: 0.85rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
-    .buttons {
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
+/* TEKST BLOKKEN */
 
-    button {
-      padding: 0.85rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      background: var(--primary-color);
-      color: #fff;
-      transition: background 0.15s ease, transform 0.05s ease;
-    }
+.text {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-family: "Inter", Arial, sans-serif;
+}
 
-    button:hover {
-      background: var(--primary-hover);
-    }
+/* BULLETS */
 
-    button:active {
-      transform: scale(0.98);
-    }
+.bullets {
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
+  font-family: "Inter", Arial, sans-serif;
+}
 
-    button.secondary {
-      background: var(--secondary-color);
-      color: var(--text-color);
-    }
+/* BUTTONS */
 
-    .image-wrapper {
-      margin: 1rem 0;
-      text-align: center;
-      height: auto;
-    }
+.buttons {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
 
-    .image-wrapper img {
-      max-width: 80%;
-      border-radius: 10px;
-    }
+button {
+  padding: 0.85rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.05s ease;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
 
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: #666;
-      text-align: center;
-    }
+button:hover {
+  background: var(--primary-hover);
+}
 
-  </style>
+button:active {
+  transform: scale(0.98);
+}
+
+button.secondary {
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+
+/* AFBEELDINGEN */
+
+.image-wrapper {
+  margin: 1rem 0;
+  text-align: center;
+  height: auto;
+}
+
+.image-wrapper img {
+  max-width: 80%;
+  border-radius: 10px;
+}
+
+/* FOOTER */
+
+.footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+</style>
 </head>
 
 <body>
