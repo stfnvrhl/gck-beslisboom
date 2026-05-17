@@ -352,3 +352,14 @@ function validateTree(tree) {
   console.log("✔ Nodes geladen:", ids.length);
 
 }
+
+// PARALLAX BACKGROUND
+
+window.addEventListener("scroll", () => {
+  requestAnimationFrame(() => {
+    const scrollY = window.scrollY;
+
+    document.body.style.backgroundPositionY =
+      `${scrollY * 0.2}px`;
+  });
+});
