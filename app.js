@@ -149,6 +149,9 @@ function render(nodeId) {
   window.scrollTo(0, 0);
 
   attachEvents();
+
+   // reset scroll position
+  window.scrollTo(0, 0);
 }
 
 
@@ -355,3 +358,14 @@ function validateTree(tree) {
   console.log("✔ Nodes geladen:", ids.length);
 
 }
+
+// PARALLAX BACKGROUND
+
+window.addEventListener("scroll", () => {
+  requestAnimationFrame(() => {
+    const scrollY = window.scrollY;
+
+    document.body.style.backgroundPositionY =
+      `${scrollY * 0.2}px`;
+  });
+});
