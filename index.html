@@ -32,9 +32,12 @@ body {
   background-repeat: no-repeat;     
   padding: 1rem;
   min-height: 100vh;
+  background-color: var(--gck-green); /* fallback */
+  z-index: -1;
 }
 
 .container {
+  position: relative;
   max-width: 720px;
   margin: auto;
   background: rgba(255,255,255,0.32);
@@ -42,6 +45,7 @@ body {
   padding: 1.75rem;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  z-index: 1;
 }
 
 /* TITEL */
@@ -134,6 +138,8 @@ button.secondary {
   position: absolute;
   bottom: 15px;
   left: 20px;
+  z-index: 10;
+  outline: 2px solid red;
 }
 
 .logo img {
@@ -142,7 +148,6 @@ button.secondary {
 }
 
 /* FOOTER */
-
 .footer {
   margin-top: 2rem;
   font-size: 0.85rem;
@@ -157,7 +162,8 @@ button.secondary {
 <body>
   <div class="container">
     <div id="app"></div>
-    <div class="footer">Beslisboom Kleiwegkwartier</div>
+    <div class="footer">Beslisboom Kleiwegkwartier</div>    
+    <div class="logo"> <img src="images/logo.png"> </div>
   </div>
 
   <!-- Alleen je applicatielogica -->

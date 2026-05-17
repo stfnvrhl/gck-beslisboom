@@ -146,6 +146,9 @@ function render(nodeId) {
   app.innerHTML = html;
 
   attachEvents();
+
+   // reset scroll position
+  window.scrollTo(0, 0);
 }
 
 
