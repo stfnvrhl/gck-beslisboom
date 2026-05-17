@@ -31,7 +31,8 @@ body {
   background-image:url("images/background_1.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;     
+  background-repeat: no-repeat;  
+  background-attachment: scroll; /* zorgt dat de achtergrond wel/niet meebeweegt bij scrollen */   
   padding: 1rem;
 }
 
@@ -120,16 +121,16 @@ button.secondary {
 /* AFBEELDINGEN */
 
 .image-wrapper {
-  margin: 1rem 0;
+  margin: 1rem 1.2rem;
   text-align: center;
-  height: auto;
 }
 
 .image-wrapper img {
-  max-width: 80%;
+  width: 100%;
+  max-width: 100%;
   border-radius: 10px;
+  display: block;
 }
-
 
 /* LOGO */
 .logo {
